@@ -9,11 +9,11 @@ class Solution {
               set.remove(s.charAt(i));
               i++;
           }
-          set.add(s.charAt(j));
           ans=Math.max(ans,j-i+1);
+          set.add(s.charAt(j));
           j++;
-
       }
       return ans;
+
     }
 }
