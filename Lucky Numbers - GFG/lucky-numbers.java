@@ -26,19 +26,24 @@ class Driver
 
 class Solution
 {
+    //static int c=2;
     public static boolean check(int n,int counter)
     {
-        if(counter<=n){
-            if(n%counter==0)
+        if(counter>n){
+            return true;
+        }
+            if(n%counter==0){
                 return false;
+            }
 		    // calculate next position of input number
 		    n=n-n/counter;
 		    counter++;
 		    
 		    return check(n, counter);
-        }    
-       	else
-       		return true;
+          
+       
+       	//	return true;
+
     }
     
     
