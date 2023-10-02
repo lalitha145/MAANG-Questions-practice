@@ -1,24 +1,28 @@
 class Solution {
     public int maxSumAfterPartitioning(int[] arr, int k) {
-        int n = arr.length;
+       int n = arr.length;
         int dp[] = new int[n];
         Arrays.fill(dp,-1);
-        return func(0,n,arr,k,dp);
+        return helper(arr,k,0,dp);
     }
-    
-    public int func(int ind,int n,int arr[],int k,int [] dp){
-        if(ind == n) return 0;
-        if(dp[ind] != -1) return dp[ind];
-        int maxiSum =Integer.MIN_VALUE;
-        int len =0;
-        int maxi = Integer.MIN_VALUE;
-        for(int j=ind;j<ind+k && j<n;j++){
-            len++;
-            maxi = Math.max(maxi,arr[j]);
-            int sum = (len*maxi) + func(j+1,n,arr,k,dp);
-            maxiSum=Math.max(sum,maxiSum);
-            
+    static int helper(int a[],int k,int ind,int dp[]){
+        if(ind==a.length){
+            return 0;
         }
-        return dp[ind] = maxiSum;
+        int maxSum=Integer.MIN_VALUE;
+        int len=0;
+        int maxValue=Integer.MIN_VALUE;
+        if(dp[ind]!=-1){
+            return dp[ind];
+        }
+        for(int i=ind;i<Math.min(ind+k,a.length);i++){
+            len++;
+            maxValue=Math.max(maxValue,a[i]);
+           
+            int sum=(len*maxValue)+helper(a,k,i+1,dp);
+            maxSum=Math.max(maxSum,sum);
+        }
+        return dp[ind]=maxSum;
+
     }
 }
