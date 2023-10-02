@@ -1,15 +1,22 @@
 class Solution {
-    public int hIndex(int[] nums) {
-        int dp[]=new int[nums.length];
-       for(int i=0;i<nums.length;i++){
-        dp[i]=nums.length-i;
-       }
-       for(int i=0;i<dp.length;i++){
-           if(nums[i]>=dp[i]){
-               return dp[i];
-           }
-       }
-       return 0;
-    
+    public int hIndex(int[] c) {
+        
+        int n=c.length;
+        int low=0;
+        int high=n-1;
+        int ans=-1;
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(c[mid]==n-mid){
+                ans=n-mid;
+                return ans;
+                
+            }else if(c[mid]<n-mid){
+                low=mid+1;
+            }else{
+                high=mid-1;
+            }
+        }
+        return n-low;
     }
 }
