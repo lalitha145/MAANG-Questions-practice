@@ -3,9 +3,7 @@ class Solution {
     int ans=Integer.MAX_VALUE;
     public boolean isPower5(String s){
         long num = 0;
-        for(char c : s.toCharArray()){
-            num = num*2 + (c-'0');
-        }
+        num=Integer.parseInt(s,2);
         while(num > 1){
             if(num%5 != 0){
                 return false;
