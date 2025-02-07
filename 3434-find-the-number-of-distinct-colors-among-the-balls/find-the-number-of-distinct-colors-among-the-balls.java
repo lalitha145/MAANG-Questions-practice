@@ -1,25 +1,28 @@
 class Solution {
     public int[] queryResults(int limit, int[][] queries) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        HashMap<Integer,Integer> colorSet=new HashMap<>();
+        int i=0;
         int res[]=new int[queries.length];
-        HashMap<Integer,Integer> m1=new HashMap<>();
-        HashMap<Integer,Integer> m2=new HashMap<>();
-        int k=0;
-        for(int a[]:queries){
-            if(m1.containsKey(a[0])){
-                int c=m1.get(a[0]);
-                if(m2.containsKey(c)&& m2.get(c)==1){
-                    m2.remove(c);
-                    m2.put(a[1],m2.getOrDefault(a[1],0)+1);
-                }else if(m2.containsKey(c)){
-                    m2.put(c,m2.getOrDefault(c,0)-1);
-                    m2.put(a[1],m2.getOrDefault(a[1],0)+1);
-                }
+        for(int query[]:queries){
+            int ball=query[0];
+            int color=query[1];
+            if(map.containsKey(ball)){
+                int existingColor=map.get(ball);
+                
+                colorSet.put(existingColor,colorSet.get(existingColor)-1);
+                if(colorSet.get(existingColor)==0) colorSet.remove(existingColor);
+                colorSet.put(color,colorSet.getOrDefault(color,0)+1);
+                map.put(ball,color);
+                
             }else{
-                m2.put(a[1],m2.getOrDefault(a[1],0)+1);
+                colorSet.put(color,colorSet.getOrDefault(color,0)+1);
+                map.put(ball,color);
             }
-            m1.put(a[0],a[1]);
-            res[k++]=m2.size();
+           
+            res[i++]=colorSet.size();
         }
         return res;
+        
     }
 }
