@@ -29,11 +29,11 @@ class Solution {
     }
 
     void sortDesc(int row,int col,int grid[][]){
-      int rowInd=grid.length-1;
-      while(rowInd>0){
+      int colInd=grid.length-1;
+      while(colInd>0){
         int colStart=col;
         int rowStart=row;
-        while(colStart<rowInd && rowStart<rowInd){
+        while(colStart<colInd && rowStart<colInd){
             if(grid[rowStart][colStart]<grid[rowStart+1][colStart+1]){
                 int temp=grid[rowStart][colStart];
                 grid[rowStart][colStart]=grid[rowStart+1][colStart+1];
@@ -42,7 +42,7 @@ class Solution {
             colStart++;
             rowStart++;
         }
-        rowInd--;
+        colInd--;
       }
 
     }
