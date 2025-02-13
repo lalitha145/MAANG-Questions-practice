@@ -1,27 +1,32 @@
-import java.util.*;
-
 class NumberContainers {
-    private Map<Integer, PriorityQueue<Integer>> res;
-    private Map<Integer, Integer> index_val;
-
+    HashMap<Integer,PriorityQueue<Integer>> num_indices;
+    HashMap<Integer,Integer> ind_number=new HashMap<>();
     public NumberContainers() {
-        res = new HashMap<>();
-        index_val = new HashMap<>();
+       num_indices=new HashMap<>();
     }
     
     public void change(int index, int number) {
-        if (index_val.containsKey(index)) {
-            int prevNum = index_val.get(index);
-            if (prevNum == number) return;
-            res.get(prevNum).remove(index);
-        }
-
-        res.computeIfAbsent(number, k -> new PriorityQueue<>()).offer(index);
-        index_val.put(index, number);
+         if(ind_number.containsKey(index)){
+           int prevNumber=ind_number.get(index);
+           if(prevNumber==number) return;
+           num_indices.get(prevNumber).remove(index); 
+         }
+         if(!num_indices.containsKey(number)){
+            num_indices.put(number,new PriorityQueue<>());
+         }
+         num_indices.get(number).add(index);
+         ind_number.put(index,number);
     }
     
     public int find(int number) {
-        PriorityQueue<Integer> pq = res.getOrDefault(number, new PriorityQueue<>());
+        PriorityQueue<Integer> pq = num_indices.getOrDefault(number, new PriorityQueue<>());
         return pq.isEmpty() ? -1 : pq.peek();
     }
 }
+
+/**
+ * Your NumberContainers object will be instantiated and called as such:
+ * NumberContainers obj = new NumberContainers();
+ * obj.change(index,number);
+ * int param_2 = obj.find(number);
+ */
