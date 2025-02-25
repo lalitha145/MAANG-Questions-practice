@@ -1,9 +1,10 @@
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        ArrayList<Integer> a=new ArrayList<>();
+    ArrayList<Integer> a=new ArrayList<>();
       for(int i:nums1){
         a.add(i);
       }
+        System.out.println();
       for(int i:nums2){
         a.add(i);
       }
