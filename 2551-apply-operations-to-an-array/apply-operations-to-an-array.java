@@ -18,7 +18,7 @@ class Solution {
                 j++;
             }else if(nums[j]==0 && nums[i]!=0){
                 i=j;
-                //j++;
+                j++;
             }else{
                 j++;
             }
