@@ -8,21 +8,18 @@ class Solution {
                 nums[i+1]=0;
             }
         }
-        int i=0,j=1;
-        while(j<n){
-            if(nums[j]!=0 && nums[i]==0){
+        int i=0;
+        for(int j=1;j<nums.length;j++){
+            if(nums[i]==0 && nums[j]!=0){
                 int t=nums[i];
                 nums[i]=nums[j];
                 nums[j]=t;
                 i++;
-                j++;
             }else if(nums[j]==0 && nums[i]!=0){
                 i=j;
-                j++;
-            }else{
-                j++;
             }
         }
+
         return nums;
         
     }
