@@ -12,7 +12,7 @@ class Solution {
         }
         //Queue gonna store ele and index
         boolean vis[]=new boolean[arr.length];
-        q.add(new int[]{0,0});
+        q.add(new int[]{arr[0],0});
         int count=0;
         while(!q.isEmpty()){
             int size=q.size();
@@ -30,14 +30,14 @@ class Solution {
                     vis[ind+1]=true;
 
                 }
-                if(map.containsKey(arr[ind])){
-                    for(int j=0;j<map.get(arr[ind]).size();j++){
-                        if(map.get(arr[ind]).get(j)!=ind && !vis[map.get(arr[ind]).get(j)]){
-                            q.add(new int[]{arr[ind],map.get(arr[ind]).get(j)});
-                            vis[map.get(arr[ind]).get(j)]=true;
+                if(map.containsKey(ele)){
+                    for(int j=0;j<map.get(ele).size();j++){
+                        if(map.get(ele).get(j)!=ind && !vis[map.get(ele).get(j)]){
+                            q.add(new int[]{ele,map.get(ele).get(j)});
+                            vis[map.get(ele).get(j)]=true;
                         }
                     }
-                    map.remove(arr[ind]);
+                    map.remove(ele);
                 }
             }
             count++;
