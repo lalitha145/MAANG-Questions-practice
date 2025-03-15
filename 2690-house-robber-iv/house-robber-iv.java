@@ -1,28 +1,26 @@
 class Solution {
-
     public int minCapability(int[] nums, int k) {
-        // Store the maximum nums value in maxReward.
-        int minReward = 1;
-        int maxReward = Arrays.stream(nums).max().getAsInt();
-        int totalHouses = nums.length;
-
-        // Use binary search to find the minimum reward possible.
-        while (minReward < maxReward) {
-            int midReward = (minReward + maxReward) / 2;
-            int possibleThefts = 0;
-
-            for (int index = 0; index < totalHouses; ++index) {
-                if (nums[index] <= midReward) {
-                    possibleThefts += 1;
-                    index++; // Skip the next house to maintain the
-                    // non-adjacent condition
-                }
+        int low=1, high=Arrays.stream(nums).max().getAsInt();
+        int ans=0;
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(helper(mid,nums,k)){
+                ans=mid;
+               high=mid-1;
+            }else{
+                low=mid+1;
             }
-
-            if (possibleThefts >= k) maxReward = midReward;
-            else minReward = midReward + 1;
         }
-
-        return minReward;
+        return ans;
+    }
+    boolean helper(int mid,int nums[],int k){
+        int cnt=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]<=mid){
+                cnt++;
+                i++;
+            }
+        }
+        return cnt>=k;
     }
 }
