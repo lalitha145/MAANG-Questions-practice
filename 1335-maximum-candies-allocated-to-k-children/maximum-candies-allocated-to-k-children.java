@@ -1,33 +1,28 @@
 class Solution {
     public int maximumCandies(int[] candies, long k) {
-        long totalCandies=0;
-        for(int i:candies){
-            totalCandies+=i;
-        }
-        if(totalCandies<k){
-          return 0;
-        }
-        long low=1;
-        long high=Long.MIN_VALUE;
-        for(int i:candies){
-            high=Math.max(high,i);
-        }
-        while(low<=high){
-            long mid=(low+high)/2;
-            if(isPossible(mid,candies,k)){
-                low=mid+1;
-            }else{
-                high=mid-1;
+        long low = 1, high = Arrays.stream(candies).max().getAsInt();
+        long sum = 0;
+        for(int ele:candies) sum+=ele;
+        
+        if (sum < k) return 0;
+        long ans=0;
+        while (low <= high) {
+            long mid = low + (high - low) / 2;
+            if (canAllocate(mid, candies, k)) {
+                low = mid + 1;
+                ans=mid;
+            } else {
+                high = mid - 1;
             }
         }
-        return (int)high;
+        return (int) ans;
     }
-    boolean isPossible(long mid,int nums[],long k){
-        long cnt=0;
-        for(int i:nums){
-            cnt+=(i/mid);
+
+    boolean canAllocate(long mid, int[] candies, long k) {
+        long cnt = 0;
+        for (int ele : candies) {
+            cnt += ele / mid;
         }
-      //  System.out.println(mid+"  "+cnt);
-        return cnt>=k;
+        return cnt >= k;
     }
 }
