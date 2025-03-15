@@ -1,6 +1,8 @@
 class NeighborSum {
         HashMap<Integer,int[]> map=new HashMap<>();
         int g[][];
+        int adj[][]={{-1,0},{0,-1},{1,0},{0,1}};
+        int dia[][]={{-1,-1},{-1,1},{1,-1},{1,1}};
     public NeighborSum(int[][] grid) {
         for(int i=0;i<grid.length;i++){
             for(int j=0;j<grid[0].length;j++){
@@ -14,10 +16,11 @@ class NeighborSum {
         int ans=0;
         int[] a=map.get(value);
         int r=a[0],c=a[1];
-        if(r-1>=0) ans+=g[r-1][c];
-        if(c-1>=0) ans+=g[r][c-1];
-        if(r+1<g.length) ans+=g[r+1][c];
-        if(c+1<g[0].length) ans+=g[r][c+1];
+        for(int d[]:adj){
+            int nr=d[0]+r;
+            int nc=d[1]+c;
+            if(valid(nr,nc,g.length,g[0].length)) ans+=g[nr][nc];
+        }
         return ans;
     }
     
@@ -25,11 +28,15 @@ class NeighborSum {
         int ans=0;
         int a[]=map.get(value);
         int r=a[0],c=a[1];
-        if(r+1<g.length && c-1>=0) ans+=g[r+1][c-1];
-        if(r+1<g.length && c+1<g[0].length) ans+=g[r+1][c+1];
-        if(r-1>=0 && c+1<g[0].length) ans+=g[r-1][c+1];
-        if(r-1>=0 && c-1>=0) ans+=g[r-1][c-1];
+        for(int d[]:dia){
+            int nr=d[0]+r;
+            int nc=d[1]+c;
+            if(valid(nr,nc,g.length,g[0].length)) ans+=g[nr][nc];
+        }
         return ans;
+    }
+    boolean valid(int i,int j,int m,int n){
+        return i>=0 && j>=0 && i<m && j<n;
     }
 }
 
