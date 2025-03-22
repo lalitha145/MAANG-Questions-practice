@@ -11,7 +11,7 @@ class Solution {
                 }
 
             }else{
-                if(nums[low]>nums[mid]){
+                if(nums[mid]<nums[high]){
                    high=mid;
                 }else{
                    low=mid;
