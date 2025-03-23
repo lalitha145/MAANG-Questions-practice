@@ -6,13 +6,12 @@ class Solution {
         while(low<=high){
             int mid=low+(high-low)/2;
             if(helper(nums,mid,k)){
-                low=mid+1;
-            }else{
-                ans=mid;
                high=mid-1;
+            }else{
+                low=mid+1;
             }
         }
-        return ans;
+        return low;
 
     }
     boolean helper(int nums[],int mid,int k){
@@ -26,20 +25,7 @@ class Solution {
                 sum=ele;
             }
         }
-        return splits>k;
+        return splits<=k;
     }
-    //  static boolean helper(int mid,int nums[],int k){
-    //     int split=1;
-    //     int sum=0;
-    //     for(int i:nums){
-    //       if(sum+i<=mid){
-    //           sum+=i;
-    //       }else{
-    //           split++;
-    //           sum=i;
-    //       }
-
-    //     }
-    //     return split>k;
-    // }
+   
 }
