@@ -5,7 +5,7 @@ class Solution {
         return ans;
     }
     void helper(String s,int i,List<String> ans,String temp,int k){
-        System.out.println("Tmep :"+temp);
+        // System.out.println("Tmep :"+temp);
         if(i==s.length() && k==4 ){
             ans.add(temp.substring(0,temp.length()-1));
             return;
