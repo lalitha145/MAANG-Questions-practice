@@ -1,37 +1,24 @@
-
-class Pair{
-    int node,color;
-    public Pair(int node,int color){
-        this.node=node;
-        this.color=color;
-    }
-}
 class Solution {
     public boolean isBipartite(int[][] graph) {
-        int colorNode[]=new int[graph.length];
-        Arrays.fill(colorNode,-1);
-        for(int i=0;i<graph.length;i++){
-            if(colorNode[i]==-1){
-              if(bfs(colorNode,i,graph)==false) return false;
-            }
+        int v=graph.length;
+        int color[]=new int[v];
+        Arrays.fill(color,-1);
+        for(int i=0;i<v;i++){
+           if(color[i]==-1){
+            if(dfs(color,i,graph,0)==false) return false;
+           }
         }
         return true;
     }
-    boolean bfs(int colorNode[],int node,int g[][]){
-        Queue<Pair> q=new LinkedList<>();
-        q.add(new Pair(node,0));
-        while(!q.isEmpty()){
-            Pair poll=q.poll();
-            int currNode=poll.node;
-            int currColor=poll.color;
-            for(int neighbour:g[currNode]){
-                if(colorNode[neighbour]==-1){
-                    colorNode[neighbour]=1-currColor;
-                    q.add(new Pair(neighbour,colorNode[neighbour]));
-                }else if(colorNode[neighbour]==currColor) return false;
-            }
+    boolean dfs(int color[],int node,int g[][],int nodeColor){
+        color[node]=nodeColor;
+        for(int nb:g[node]){
+            if(color[nb]==-1){
+                color[nb]=1-nodeColor;
+                if(dfs(color,nb,g,color[nb])==false) return false;
+                
+            }else if(color[nb]==nodeColor) return false;
         }
         return true;
-       
     }
 }
