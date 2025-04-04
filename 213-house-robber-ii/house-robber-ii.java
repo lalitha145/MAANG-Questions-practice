@@ -1,23 +1,33 @@
 class Solution {
     public int rob(int[] nums) {
         int dp[]=new int[nums.length];
-         Arrays.fill(dp,-1);
-        int ans1=helper(nums,nums.length-1,true,dp);
-        Arrays.fill(dp,-1);
-        int ans2=helper(nums,nums.length-2,false,dp);
-        if(nums.length==1) return nums[0];
+       if(nums.length==1) return nums[0];
+        int ans=0;
+        //pick 0
+        dp[0]=nums[0];
+        dp[1]=Math.max(dp[1],dp[0]);
+        
+        for(int i=2;i<nums.length-1;i++){
+            int pick=nums[i]+dp[i-2];
+            int np=dp[i-1];
+            dp[i]=Math.max(pick,np);
 
-        return Math.max(ans1,ans2);
-    }
-    int helper(int nums[], int ind , boolean flag,int dp[]){
-        if(flag==true){
-            if(ind==0) return 0;
-         }
-         if(ind<0) return 0;
-         if(dp[ind]!=-1) return dp[ind];
-         
-        int pick=nums[ind]+helper(nums,ind-2,flag,dp);
-        int np=0+helper(nums,ind-1,flag,dp);
-        return dp[ind]=Math.max(pick,np);
+        }
+     
+        ans=dp[nums.length-2];
+        System.out.println(ans);
+
+        Arrays.fill(dp,0);
+        dp[0]=0;
+        dp[1]=nums[1];
+        for(int i=2;i<nums.length;i++){
+            int pick=nums[i]+dp[i-2];
+            int np=dp[i-1];
+            dp[i]=Math.max(pick,np);
+
+        }
+        
+
+      return ans=Math.max(ans,dp[nums.length-1]);
     }
 }
