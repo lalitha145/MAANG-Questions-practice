@@ -25,7 +25,7 @@ class Solution {
             if (isSafe(i, adj, color, node)) {
                 color[node] = i;
                 if(helper(node + 1, adj, n, color)) return true;
-                // color[node] = 0;
+                 color[node] = 0;
             }
         }
         return false;
