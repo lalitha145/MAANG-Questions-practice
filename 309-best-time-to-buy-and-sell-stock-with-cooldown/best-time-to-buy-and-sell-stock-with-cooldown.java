@@ -19,15 +19,15 @@ class Solution {
             int buyNow = -prices[i] + helper(i + 1, 1, prices, dp);
             // Option 2: Skip
             int skip = helper(i + 1, 0, prices, dp);
-            profit = Math.max(buyNow, skip);
+           return dp[i][buy]=profit = Math.max(buyNow, skip);
         } else {
             // Option 1: Sell stock
             int sellNow = prices[i] + helper(i + 2, 0, prices, dp);
             // Option 2: Hold
             int hold = helper(i + 1, 1, prices, dp);
-            profit = Math.max(sellNow, hold);
+            return dp[i][buy]=profit = Math.max(sellNow, hold);
         }
 
-        return dp[i][buy] = profit;
+        // return dp[i][buy] = profit;
     }
 }
