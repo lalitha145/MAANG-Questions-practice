@@ -1,6 +1,6 @@
 class Solution {
     public int maxProfit(int[] prices) {
-        int[][] dp = new int[prices.length][3];
+        int[][] dp = new int[prices.length][2];
         for (int[] row : dp) {
             Arrays.fill(row, -1);
         }
