@@ -19,16 +19,17 @@ class Solution {
     }
 
     boolean helper(int node, List<List<Integer>> adj, int n, int[] color) {
-        if (node == n) return true;
+        if(node==n) return true;
 
         for (int i = 1; i <= 4; i++) {
             if (isSafe(i, adj, color, node)) {
                 color[node] = i;
-                if (helper(node + 1, adj, n, color)) return true;
-                color[node] = 0;
+                if(helper(node + 1, adj, n, color)) return true;
+                // color[node] = 0;
             }
         }
         return false;
+        
     }
 
     boolean isSafe(int c, List<List<Integer>> adj, int[] color, int node) {
