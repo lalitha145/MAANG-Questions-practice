@@ -5,7 +5,7 @@ class Solution {
            int l=query[0];
            int r=query[1];
            pre[l]+=1;
-           pre[r+1]+=-1;
+           pre[r+1]-=1;
 
        }
        System.out.println(Arrays.toString(pre));
