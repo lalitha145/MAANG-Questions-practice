@@ -20,9 +20,9 @@ class Solution {
             boolean l  = s1.lower(y)  != null;
             boolean r = s1.higher(y) != null;
             boolean t    = s2.higher(x)  != null;
-            boolean bottom  = s2.lower(x) != null;
+            boolean bt  = s2.lower(x) != null;
 
-            if (l && r&& t&& bottom) {
+            if (l && r&& t&& bt) {
                 ans++;
             }
         }
