@@ -19,7 +19,7 @@ class Solution {
             int nr=i+d[0];
             int nc=j+d[1];
             if(nr>=0 && nc>=0 && nr<grid.length && nc<grid[0].length  && !vis[nr][nc] && grid[nr][nc]=='1'){
-                vis[nr][nc]=true;
+                // vis[nr][nc]=true;
                 dfs(nr,nc,vis,grid);
             }
 
