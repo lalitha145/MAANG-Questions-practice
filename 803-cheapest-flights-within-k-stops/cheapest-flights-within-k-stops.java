@@ -43,7 +43,7 @@ class Solution {
             for(Pair p:adj.get(node)){
                 int adjNode=p.adjNode;
                 int adjCost=p.cost;
-                if(dist[adjNode]>adjCost+cost && stops<=k){
+                if(dist[adjNode]>adjCost+cost){
                     dist[adjNode]=adjCost+cost;
                     pq.add(new Tuple(adjNode, dist[adjNode], stops+1));
                 }
