@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     public int maxFreqSum(String s) {
         Map<Character, Integer> freq = new HashMap<>();
