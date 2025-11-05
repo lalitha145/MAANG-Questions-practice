@@ -1,7 +1,5 @@
 class RandomizedSet {
    HashMap<Integer,Integer> map;
-       private Random rand=new Random();
-
    List<Integer> list;
     public RandomizedSet() {
         list=new ArrayList<>();
@@ -28,7 +26,7 @@ class RandomizedSet {
     }
     
     public int getRandom() {
-        return list.get(rand.nextInt(list.size()));
+        return list.get((int)(Math.random()*list.size()));
     }
 }
 
