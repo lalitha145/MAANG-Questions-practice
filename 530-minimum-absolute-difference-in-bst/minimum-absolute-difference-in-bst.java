@@ -15,13 +15,12 @@
  */
 
 class Solution {
-    public int getMax(TreeNode root){
-    return root.right != null ? getMax(root.right) : root.val;
-}
-
-public int getMin(TreeNode root){
-    return root.left != null ? getMin(root.left) : root.val;
-}
+    int getMin(TreeNode root){
+        return root.left!=null? getMin(root.left):root.val;
+    }
+     int getMax(TreeNode root){
+        return root.right!=null? getMax(root.right):root.val;
+    }
     public int getMinimumDifference(TreeNode root) {
         int min=Integer.MAX_VALUE;
         if(root.left!=null){
