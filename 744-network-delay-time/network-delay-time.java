@@ -4,7 +4,7 @@ class Solution {
        for(int time[]:times){
             adj.computeIfAbsent(time[0],k1->new ArrayList<>()).add(new int[]{time[1], time[2]});
        }
-       Queue<int[]> q=new LinkedList<>();
+       PriorityQueue<int[]> q=new PriorityQueue<>((a,b)->a[1]-b[1]);
        q.add(new int[]{k,0});
        int dis[]=new int[n+1];
     
@@ -16,6 +16,7 @@ class Solution {
         int  poll[]=q.poll();
         int node=poll[0];
         int disSoFar=poll[1];
+        if(disSoFar> dis[node]) continue;
         if(adj.get(node)==null) continue;
         for(int a[]:adj.get(node)){
             int adjDis=a[1];
@@ -23,7 +24,6 @@ class Solution {
             if(dis[adjNode]> adjDis+disSoFar){
                 dis[adjNode]=adjDis+disSoFar;
                 q.add(new int[]{adjNode, adjDis+disSoFar});
-
                 cnt++;
             }
         }
