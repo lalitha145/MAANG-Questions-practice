@@ -1,39 +1,37 @@
-class Pair{
-    int row, col, value;
-    public Pair(int row, int col, int value){
+class Pair {
+    int row, col, step;
+    public Pair(int row, int col, int step){
         this.row=row;
         this.col=col;
-        this.value=value;
+        this.step=step;
     }
 }
+
 class Solution {
     public int swimInWater(int[][] grid) {
-        int m=grid.length, n=grid[0].length;
-        PriorityQueue<Pair> pq=new PriorityQueue<>((a,b)->a.value-b.value);
-        pq.add(new Pair(0,0,grid[0][0]));
-        boolean vis[][]=new boolean[m][n];
-        int dir[][]={{-1,0},{1,0},{0,1},{0,-1}};
-        vis[0][0]=true;
-        int max=0;
+        int n = grid.length;
+        boolean[][] vis = new boolean[n][n];
+        int[][] dirs = {{1,0},{-1,0},{0,1},{0,-1}};
+
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> a.step - b.step);
+        pq.offer(new Pair(0,0, grid[0][0]));
+        vis[0][0] = true;
+
         while(!pq.isEmpty()){
-            Pair poll=pq.poll();
-            int row=poll.row;
-            int col=poll.col;
-            int value=poll.value;
-            max=Math.max(max, value);
-            if(row==m-1 && col==n-1) return Math.max(max, grid[row][col]);
-            for(int d[]:dir){
-                int nr=d[0]+row;
-                int nc=d[1]+col;
-                if(isValid(nr,nc,m,n) && !vis[nr][nc]){
-                    pq.add(new Pair(nr,nc,grid[nr][nc]));
-                    vis[nr][nc]=true;
+            Pair cur = pq.poll();
+            int r = cur.row, c = cur.col, step = cur.step;
+
+            if(r == n-1 && c == n-1) return step;
+
+            for(int[] d : dirs){
+                int nr = r + d[0];
+                int nc = c + d[1];
+                if(nr>=0 && nc>=0 && nr<n && nc<n && !vis[nr][nc]){
+                    vis[nr][nc] = true;
+                    pq.offer(new Pair(nr, nc, Math.max(step, grid[nr][nc])));
                 }
             }
         }
         return -1;
-    }
-    boolean isValid(int row, int col, int m, int n){
-        return row>=0 && col>=0 && row<m && col<n;
     }
 }
