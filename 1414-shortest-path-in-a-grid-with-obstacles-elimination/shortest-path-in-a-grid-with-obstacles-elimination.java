@@ -1,32 +1,33 @@
 class Solution {
     public int shortestPath(int[][] grid, int k) {
-        int rows = grid.length, cols = grid[0].length;
-        Queue<int[]> queue = new LinkedList<>();
-        boolean[][][] vis = new boolean[rows][cols][k + 1];
+        Queue<int[]> q=new LinkedList<>();
+        q.add(new int[]{0,0,k});
+        boolean vis[][][]=new boolean[grid.length][grid[0].length][k+1];
+        int level=0;
+        vis[0][0][k]=true;
+        int dir[][]={{-1,0},{0,-1}, {1,0},{0,1}};
 
-        queue.add(new int[]{0, 0, k, 0}); // row, col, remaining_k, steps
-        vis[0][0][k] = true;
-
-        int[][] dir = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}}; 
-
-        while (!queue.isEmpty()) {
-            int[] poll = queue.poll();
-            int r = poll[0], c = poll[1], remainingK = poll[2], steps = poll[3];
-
-            if (r == rows - 1 && c == cols - 1) return steps;
-
-            for (int[] d : dir) {
-                int nr = r + d[0], nc = c + d[1];
-
-                if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) {
-                    int newK = remainingK - grid[nr][nc];
-
-                    if (newK >= 0 && !vis[nr][nc][newK]) {
-                        vis[nr][nc][newK] = true;
-                        queue.add(new int[]{nr, nc, newK, steps + 1});
+        while(!q.isEmpty()){
+            int size=q.size();
+            for(int i=0;i<size;i++){
+            int poll[]= q.poll();
+            int r=poll[0], c=poll[1];
+            int remK=poll[2];
+            if(r==grid.length-1 && c==grid[0].length-1) return level;
+            for(int nb[]:dir){
+                int nr=nb[0]+r;
+                int nc=nb[1]+c;
+                if(nr>=0 && nc>=0 && nr<grid.length && nc<grid[0].length){
+                    int newK=remK-grid[nr][nc];
+                    if(newK>=0 && !vis[nr][nc][newK]){
+                        q.add(new int[]{nr,nc,newK});
+                        vis[nr][nc][newK]=true;
                     }
+                    
                 }
             }
+            }
+            level++;
         }
         return -1;
     }
