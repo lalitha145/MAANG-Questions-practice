@@ -1,18 +1,15 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
-       if(s.length()!=t.length()) return false;
         int fre[]=new int[26];
-        for(char c:s.toCharArray()){
-            fre[c-'a']++;
+        for( char ch :s.toCharArray()){
+            fre[ch-'a']++;
         }
-        for(char c:t.toCharArray()){
-            fre[c-'a']--;
+        for(char ch :t.toCharArray()){
+            fre[ch-'a']--;
         }
-        for(int i:fre){
-         if(i!=0){
-            return false;
+        for(int i=0;i<26;i++){
+            if(fre[i]!=0) return false;
         }
-     }
         return true;
     }
 }
