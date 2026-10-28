@@ -1,18 +1,29 @@
 class Solution {
     public boolean validPalindrome(String s) {
-        return helper(s, 0, s.length()-1, 0);
-    }
-    boolean helper(String s, int i, int j, int cnt){
-        if(i>j) {
-            return true;
+        int i=0, j=s.length()-1;
+        int cnt=0;
+        boolean is_i=false;
+        boolean is_j=false;
+        while(i<=j){
+            if(s.charAt(i)==s.charAt(j)) {
+                i++;
+                j--;
+            }else {
+                if(check(s,i+1, j) || check(s,i,j-1)) return true;
+                return false;
+            }
+           
         }
-        if(s.charAt(i)==s.charAt(j)) return helper(s,i+1,j-1,cnt);
-        if(cnt<=0){
-            return helper(s,i+1,j,cnt+1) || helper(s,i,j-1, cnt+1);
-        }else{
+        return true;
+    }
+    boolean check(String s, int i, int j){
+        while(i<j){
+          if(s.charAt(i)!=s.charAt(j)){
             return false;
+          }
+          i++;
+          j--;
         }
-
+        return true;
     }
-
 }
