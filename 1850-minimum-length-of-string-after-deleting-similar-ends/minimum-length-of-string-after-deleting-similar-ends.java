@@ -10,7 +10,6 @@ class Solution {
                 return j-i+1;
             }
         }
-        System.out.println(i+"  "+j);
         if(i==j) return 1;
         return 0;
     }
