@@ -3,7 +3,7 @@ class Solution {
         return helper(s, 0, s.length()-1, 0);
     }
     boolean helper(String s, int i, int j, int cnt){
-        if(i>=j) {
+        if(i>j) {
             if(cnt<=1) return true;
         }
         if(s.charAt(i)==s.charAt(j)) return helper(s,i+1,j-1,cnt);
