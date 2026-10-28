@@ -4,7 +4,8 @@ class Solution {
         while(i<j){
             if(s.charAt(i)==s.charAt(j)){
                 char temp=s.charAt(i);
-                while(i<j && s.charAt(i)==temp) i++;
+                
+                while(i<s.length() && s.charAt(i)==temp) i++;
                 while(j>=0 && s.charAt(j)==temp) j--;
             }else{
                 return j-i+1;
