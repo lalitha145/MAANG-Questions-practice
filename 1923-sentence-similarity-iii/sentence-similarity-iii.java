@@ -15,7 +15,7 @@ class Solution {
         }
         System.out.println(startS1+"  "+endS1);
 
-        while(endS1>=0 && endS2>=0 && a[endS1].equals(b[endS2])){
+        while(endS1>=0 && a[endS1].equals(b[endS2])){
             endS1--;
             endS2--;
         }
