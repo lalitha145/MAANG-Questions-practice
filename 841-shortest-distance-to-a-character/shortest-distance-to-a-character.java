@@ -11,7 +11,6 @@ class Solution {
             left[i]=i-1>=0?left[i-1]:-1;
            }
         }
-        System.out.println(Arrays.toString(left));
         for(int i=s.length()-1;i>=0;i--){
             if(s.charAt(i)==c){
                 right[i]=i;
@@ -27,7 +26,6 @@ class Solution {
                 ans[i]=left[i]==-1? right[i]-i:i-left[i];
             }
         }
-        System.out.println(Arrays.toString(right));
         return ans;
     }
 }
