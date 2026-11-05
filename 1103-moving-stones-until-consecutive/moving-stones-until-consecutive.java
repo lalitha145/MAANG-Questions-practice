@@ -9,7 +9,7 @@ class Solution {
       
         if(temp[0]+1==temp[1] && temp[1]+1==temp[2]) return new int[]{0,0};
         int max=(temp[2]-temp[1]-1) + (temp[1]-temp[0]-1);
-          if(temp[1]==temp[0]+1 || temp[2]==temp[1]+1 || temp[2]-temp[1]<=2 || temp[1]-temp[0]<=2)  return new int[]{1,max};
+          if(temp[2]-temp[1]<=2 || temp[1]-temp[0]<=2)  return new int[]{1,max};
         int val1=temp[1]-1;
         temp[0]=val1;
         Arrays.sort(temp);
