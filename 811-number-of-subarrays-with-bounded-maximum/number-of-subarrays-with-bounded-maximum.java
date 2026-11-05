@@ -1,20 +1,19 @@
 class Solution {
     public int numSubarrayBoundedMax(int[] nums, int left, int right) {
-       int ind = 0;
-       return count(nums, right)-count(nums, left-1);
+        return helper(nums, right)-helper(nums,left-1);
     }
-    int count(int nums[], int max){
+    int helper(int nums[], int max){
         int cnt=0;
-        int temp=0;
-        for(int ele:nums){
+        int ans=0;
+        for(int ele: nums){
             if(ele<=max){
-                temp++;
+                cnt++;
             }else{
-                temp=0;
+                cnt=0;
             }
-            cnt+=temp;
 
+            ans+=cnt;
         }
-        return cnt;
+        return ans;
     }
 }
