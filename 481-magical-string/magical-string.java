@@ -6,7 +6,7 @@ class Solution {
         int ind=2;
         int currLen=3;
         char prev='2';
-        while(sb.length()<n){
+        while(currLen<n){
                char next=prev=='2'?'1':'2';
                int addCnt=sb.charAt(ind)-'0';
                while(addCnt>0){
