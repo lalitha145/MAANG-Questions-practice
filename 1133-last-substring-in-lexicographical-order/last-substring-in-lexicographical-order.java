@@ -16,7 +16,7 @@ class Solution {
 
                 if (i >= j) {
                      j=i+1;
-                    // i=j;
+                     
                 }
 
                 k = 0;
