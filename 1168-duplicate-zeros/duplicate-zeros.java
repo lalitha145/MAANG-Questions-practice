@@ -9,8 +9,6 @@ class Solution {
                
                    arr[j]=0;
                    i++;
-            }else{
-
             }
         }
     }
