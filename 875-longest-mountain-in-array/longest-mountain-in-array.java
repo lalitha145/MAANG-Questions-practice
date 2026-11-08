@@ -1,7 +1,7 @@
 class Solution {
     public int longestMountain(int[] arr) {
         int max=0;
-        for(int i=1;i<arr.length-1;i++){
+        for(int i=1;i<arr.length-1;){
             if(arr[i]>arr[i-1] && arr[i]>arr[i+1]){
                 int j=i-1;
                 int k=i+1;
@@ -12,8 +12,11 @@ class Solution {
                     k++;
                 }
                 max=Math.max(max, k-j+1);
+                i=k+1;
 
 
+            }else{
+                i++;
             }
         }
         return max;
