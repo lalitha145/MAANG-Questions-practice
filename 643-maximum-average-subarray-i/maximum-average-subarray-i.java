@@ -11,12 +11,11 @@ class Solution {
         ans=Math.max(ans, sum/k);
         
         while(end<nums.length){
+            
             sum+=(double)nums[end];  
             sum-=nums[start++];
-            if(end-start+1==k) {
-                ans=Math.max(ans, sum/k);
-            }
-            
+           
+            ans=Math.max(ans, (sum)/k);
             end++;
 
         }
