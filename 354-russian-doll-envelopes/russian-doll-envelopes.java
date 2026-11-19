@@ -1,46 +1,29 @@
 class Solution {
     public int maxEnvelopes(int[][] e) {
-        Arrays.sort(e,(a,b)->{
-            if(a[0]==b[0]){
-                return b[1]-a[1];
-            }
-            return a[0]-b[0];
-        });
-    
-       List<Integer> temp=new ArrayList<>();
-       int len=0;
-       for(int a[]:e){
-        if(temp.size()==0){
-            temp.add(a[1]);
+    Arrays.sort(e,(a,b)->(a[0]==b[0]?b[1]-a[1]:a[0]-b[0]));
+    int dp[]=new int[e.length];
+    int len=0;
+    for(int e1[]:e){
+        int ind=helper(0,len,e1[1],dp);
+       dp[ind]=e1[1];
+        if(ind==len){
+           
             len++;
         }
-        else{
-            int ind=bs(temp,a[1]);
-            System.out.println(ind+" ");
-            if(ind==temp.size()) {
-                temp.add(a[1]);
-            }else{
-                temp.set(ind,a[1]);
-            }
-         
-        } 
-        //System.out.println(temp+"  ");
 
-       }
-       return temp.size();
-        
-        
     }
-    int bs(List<Integer> a, int t){
-        int l=0, h=a.size()-1;
-        while(l<=h){
-            int m=(l+h)/2;
-            if(a.get(m)>=t){
-                h=m-1;
+    return len;
+    }
+    int helper(int s,int e,int t,int dp[]){
+        e=e-1;
+        while(s<=e){
+            int mid=(s+e)/2;
+            if(dp[mid]>=t){
+                e=mid-1;
             }else{
-                l=m+1;
+                s=mid+1;
             }
         }
-        return l;
+        return s;
     }
 }
