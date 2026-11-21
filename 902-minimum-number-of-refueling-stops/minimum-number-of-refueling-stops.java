@@ -1,30 +1,29 @@
 class Solution {
     public int minRefuelStops(int target, int startFuel, int[][] stations) {
 
-        int max_you_can_reach = startFuel;
+        PriorityQueue<Integer> maxHeap =
+                new PriorityQueue<>((a, b) -> b - a);
 
-        PriorityQueue<Integer> pq =
-            new PriorityQueue<>(Collections.reverseOrder());
+        long fuel = startFuel;
+        int stops = 0;
+        int i = 0;
+        int n = stations.length;
 
-        int count = 0;
-        int index = 0;
+        while (fuel < target) {
 
-        while(max_you_can_reach < target){
-
-            while(index < stations.length &&
-                  stations[index][0] <= max_you_can_reach){
-
-                pq.offer(stations[index][1]);
-                index++;
+            while (i < n && stations[i][0] <= fuel) {
+                maxHeap.offer(stations[i][1]);
+                i++;
             }
 
-            if(pq.isEmpty())
+            if (maxHeap.isEmpty()) {
                 return -1;
+            }
 
-            max_you_can_reach += pq.poll();
-            count++;
+            fuel += maxHeap.poll();
+            stops++;
         }
 
-        return count;
+        return stops;
     }
 }
