@@ -1,23 +1,20 @@
 class Solution {
-    public int[][] merge(int[][] i) {
-        Arrays.sort(i,(a,b)->a[0]-b[0]);
+    public int[][] merge(int[][] a) {
+        Arrays.sort(a,(x,y)->x[0]-y[0]);
+        int start=a[0][0];
+        int end=a[0][1];
         List<int[]> ans=new ArrayList<>();
-        int start=i[0][0];
-        int end=i[0][1];
-        for(int a[]: i){
-            int nstart=a[0];
-            int nend=a[1];
-            if(nstart<=end){
-                end=Math.max(end,nend);
-            }
-            else{
-               ans.add(new int[]{start, end});
-               start=nstart;
-               end=nend;
+        for(int i=1;i<a.length;i++){
+            if(a[i][0]<=end){
+                end=Math.max(end,a[i][1]);
+            }else{
+                ans.add(new int[]{start,end});
+                start=a[i][0];
+                end=a[i][1];
             }
         }
-        ans.add(new int[]{start, end});
-        return ans.toArray(new int[0][]);
+         ans.add(new int[]{start,end});
+         return ans.toArray(new int[0][]);
 
     }
 }
