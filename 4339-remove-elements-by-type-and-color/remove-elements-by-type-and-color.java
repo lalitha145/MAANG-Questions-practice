@@ -13,7 +13,7 @@ class Solution {
     }
 
     public boolean canRemoveAll(int[] types, int[] colors, int[] groupSize) {
-        Deque<Node> stack = new ArrayDeque<>();
+        Stack<Node> stack = new Stack<>();
 
         for (int i = 0; i < types.length; i++) {
             int type = types[i];
