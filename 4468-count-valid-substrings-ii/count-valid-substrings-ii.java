@@ -11,7 +11,7 @@ class Solution {
                 lastB=lastA;
             }
             else if(s.charAt(end)=='c' && lastB!=-1){
-                 start=Math.max(start, lastB+1);
+                 start= lastB+1;
             }
             ans+=(end-start+1);
         }
