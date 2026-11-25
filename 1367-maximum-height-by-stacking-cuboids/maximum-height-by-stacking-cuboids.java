@@ -3,7 +3,7 @@ class Solution {
         if(dp[idx]!=-1) return dp[idx];
         int ans=box[idx][2];
         for(int i=0; i<idx; i++){
-            if(box[i][0]<=box[idx][0] && box[i][1]<=box[idx][1] && box[i][2]<=box[idx][2]){
+            if(box[i][0]>=box[idx][0] && box[i][1]>=box[idx][1] && box[i][2]>=box[idx][2]){
                 ans=Math.max(ans,box[idx][2]+solve(i,box,dp));
             }
         }
@@ -15,9 +15,9 @@ class Solution {
             Arrays.sort(c);
         }
         Arrays.sort(cuboids,(a,b)->{
-            if(a[0]!=b[0]) return a[0]-b[0];
-            if(a[1]!=b[1]) return a[1]-b[1];
-            else return a[2]-b[2];
+            if(a[0]!=b[0]) return b[0]-a[0];
+            if(a[1]!=b[1]) return b[1]-a[1];
+            else return b[2]-a[2];
         });
         for(int a[]:cuboids){
             System.out.println(Arrays.toString(a));
