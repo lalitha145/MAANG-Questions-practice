@@ -5,15 +5,14 @@ class Solution {
         while(i<j){
             char left=s.charAt(i);
             char right=s.charAt(j);
-          
-            if(!Character.isLetter(left) && !Character.isDigit(left)){
+            if(left==right) {
+                i++;
+                j--;
+            }
+           else if(!Character.isLetter(left) && !Character.isDigit(left)){
                 i++;
             }
             else if(!Character.isLetter(right) && !Character.isDigit(right)){
-                j--;
-            }
-            else if(left==right) {
-                i++;
                 j--;
             }else return false;
 
