@@ -3,7 +3,7 @@ class Solution {
     {
         int count = 0;
 
-        long base = 100;
+        long base = 31;
         long mod = (long) 1e9 + 7;
 
         Set<Long> seen = new HashSet<>();
