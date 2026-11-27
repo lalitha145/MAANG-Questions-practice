@@ -1,19 +1,19 @@
 class Solution {
-    private int targetLength;
-    
     public int minSteps(int n) {
-        if (n == 1) return 0;
-        this.targetLength = n;
-        return 1 + findMinSteps(1, 1);
+        if(n==1) return 0;
+
+        return helper(n,1,0);
     }
-    
-    private int findMinSteps(int currentLength, int clipboardLength) {
-        if (currentLength == targetLength) return 0;
-        if (currentLength > targetLength) return Integer.MAX_VALUE / 2;
-        
-        int copyAndPaste = 2 + findMinSteps(currentLength * 2, currentLength);
-        int pasteOnly = 1 + findMinSteps(currentLength + clipboardLength, clipboardLength);
-        
-        return Math.min(copyAndPaste, pasteOnly);
+    int helper(int n,int cnt,int copiedAs){
+        if(cnt==n) return 0;
+        if(cnt>n) return (int)1e9;
+        int copyAndPaste=(int)1e9;
+        int pasteOnly=(int)1e9;
+        if(copiedAs>0){
+        pasteOnly=1+helper(n,cnt+copiedAs,copiedAs);
+        }
+
+        copyAndPaste=2+helper(n,2*cnt,cnt);
+        return Math.min(pasteOnly,copyAndPaste);
     }
 }
