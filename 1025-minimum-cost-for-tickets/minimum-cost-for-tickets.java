@@ -1,6 +1,6 @@
 class Solution {
     public int mincostTickets(int[] days, int[] costs) {
-        int dp[][]=new int[days.length][800];
+        int dp[][]=new int[days.length][365+30];
         for(int d[]:dp) Arrays.fill(d,-1);
         return helper(days,costs,0,0,dp);
     }
