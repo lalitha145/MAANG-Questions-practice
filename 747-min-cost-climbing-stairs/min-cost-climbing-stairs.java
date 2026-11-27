@@ -13,13 +13,21 @@ class Solution {
     //     int ch2=cost[ind]+findMin(cost,ind-2,dp);
     //     return dp[ind]=Math.min(ch1,ch2);
     // }
-     dp[0]=cost[0];
-     dp[1]=cost[1];
-     for(int i=2;i<cost.length;i++){
-        dp[i]=cost[i]+Math.min(dp[i-1],dp[i-2]);
-     }
-     return  Math.min(dp[n-1],dp[n-2]);
+    //  dp[0]=cost[0];
+    //  dp[1]=cost[1];
+    //  for(int i=2;i<cost.length;i++){
+    //     dp[i]=cost[i]+Math.min(dp[i-1],dp[i-2]);
+    //  }
+    //  return  Math.min(dp[n-1],dp[n-2]);
+    // }
+
+    int first=cost[0];
+    int second=cost[1];
+    for(int i=2;i<cost.length;i++){
+        int curr=cost[i]+Math.min(first,second);
+        first=second;
+        second=curr;
     }
-
-
+    return Math.min(first,second);
+    }
 }
