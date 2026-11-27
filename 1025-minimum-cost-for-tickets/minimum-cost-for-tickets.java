@@ -1,43 +1,59 @@
+import java.util.*;
+
 class Solution {
+
     public int mincostTickets(int[] days, int[] costs) {
-        int dp[][]=new int[days.length][365+30];
-        for(int d[]:dp) Arrays.fill(d,-1);
-        return helper(days,costs,0,0,dp);
-    }
-    int helper(int days[], int costs[],int ind,int daysCovered,int dp[][]){
-        if(ind>=days.length) return 0;
-        
-        int oneDayPass=0;
-        int sevenDayPass=0;
-        int thirtyDayPass=0;
-        int nextPossibleDayIndex=binarySearch(days,daysCovered);
-        if(nextPossibleDayIndex>=days.length) return 0;
-        int currDay=days[nextPossibleDayIndex];
-      
-        if(dp[ind][daysCovered]!=-1) return dp[ind][daysCovered];
+        int n = days.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp, -1);
 
-      
-            oneDayPass=costs[0]+helper(days,costs,nextPossibleDayIndex+1,currDay,dp);
-            sevenDayPass=costs[1]+helper(days,costs,nextPossibleDayIndex+1,currDay+6,dp);
-            thirtyDayPass=costs[2]+helper(days,costs,nextPossibleDayIndex+1,currDay+29,dp);
-       
-        return dp[ind][daysCovered]=Math.min(oneDayPass,Math.min(sevenDayPass,thirtyDayPass));
-        
+        return helper(days, costs, 0, dp);
     }
-    int binarySearch(int days[], int day){
-        int low=0,high=days.length-1;
-       // int ans=-1;
-        while(low<=high){
-            int mid=(low+high)/2;
-            if(days[mid]>day){
-              high=mid-1;
 
-            }
-            else{
-              //  ans=mid;
-                low=mid+1;
+    private int helper(int[] days, int[] costs, int i, int[] dp) {
+
+        if (i >= days.length) {
+            return 0;
+        }
+
+        if (dp[i] != -1) {
+            return dp[i];
+        }
+
+        int next1 = binarySearch(days, days[i]);
+        int next7 = binarySearch(days, days[i] + 6);
+        int next30 = binarySearch(days, days[i] + 29);
+
+        int oneDay =
+                costs[0] + helper(days, costs, next1, dp);
+
+        int sevenDay =
+                costs[1] + helper(days, costs, next7, dp);
+
+        int thirtyDay =
+                costs[2] + helper(days, costs, next30, dp);
+
+        return dp[i] =
+                Math.min(oneDay,
+                Math.min(sevenDay, thirtyDay));
+    }
+
+    private int binarySearch(int[] days, int coveredTill) {
+
+        int low = 0;
+        int high = days.length - 1;
+
+        while (low <= high) {
+
+            int mid = low + (high - low) / 2;
+
+            if (days[mid] <= coveredTill) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
             }
         }
-        return low;
+
+        return low; 
     }
 }
