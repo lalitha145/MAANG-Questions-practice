@@ -10,19 +10,17 @@ class Solution {
         int oneDayPass=0;
         int sevenDayPass=0;
         int thirtyDayPass=0;
-        int nextPossibleDay=binarySearch(days,daysCovered);
-        if(nextPossibleDay>=days.length) return 0;
-        int currDay=days[nextPossibleDay];
-        System.out.println(nextPossibleDay);
+        int nextPossibleDayIndex=binarySearch(days,daysCovered);
+        if(nextPossibleDayIndex>=days.length) return 0;
+        int currDay=days[nextPossibleDayIndex];
+      
         if(dp[ind][daysCovered]!=-1) return dp[ind][daysCovered];
 
-        // if(currDay<=daysCovered) return helper(days,costs,ind+1,daysCovered,dp);
-        // if(currDay>daysCovered){
-            oneDayPass=costs[0]+helper(days,costs,nextPossibleDay+1,currDay,dp);
-            sevenDayPass=costs[1]+helper(days,costs,nextPossibleDay+1,currDay+6,dp);
-            thirtyDayPass=costs[2]+helper(days,costs,nextPossibleDay+1,currDay+29,dp);
-           // return Math.min(oneDayPass,Math.min(sevenDayPass,thirtyDayPass));
-        // }
+      
+            oneDayPass=costs[0]+helper(days,costs,nextPossibleDayIndex+1,currDay,dp);
+            sevenDayPass=costs[1]+helper(days,costs,nextPossibleDayIndex+1,currDay+6,dp);
+            thirtyDayPass=costs[2]+helper(days,costs,nextPossibleDayIndex+1,currDay+29,dp);
+       
         return dp[ind][daysCovered]=Math.min(oneDayPass,Math.min(sevenDayPass,thirtyDayPass));
         
     }
