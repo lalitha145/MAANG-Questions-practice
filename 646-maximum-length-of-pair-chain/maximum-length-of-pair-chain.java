@@ -11,10 +11,12 @@ class Solution {
         int prevA=pairs[0][0];
         int prevB=pairs[0][1];
         for(int i=1;i<pairs.length;i++){
-            if(pairs[i][0]>prevB){
+            int currA=pairs[i][0];
+            int currB=pairs[i][1];
+            if(currA>prevB){
                 ans++;
-                prevA=pairs[i][0];
-                prevB=pairs[i][1];
+                prevA=currA;
+                prevB=currB;
             }
         }
         return ans;
