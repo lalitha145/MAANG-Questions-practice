@@ -1,26 +1,28 @@
 class Solution {
-
-public int numDecodings(String s) {
-	Integer[] memo = new Integer[s.length() + 1];
-	return numDecodings(s, 0, memo);
-}
-
-private int numDecodings(String s, int index, Integer[] memo) {
-	if (index == s.length()) {
-		return 1;
-	}
-	if (s.charAt(index) == '0') {
-		return 0;
-	}
-	if (memo[index] != null) {
-		return memo[index];
-	}
-	int way1 = numDecodings(s, index + 1, memo);
-	int way2 = 0;
-	if (index < s.length() - 1 && Integer.parseInt(s.substring(index, index + 2)) <= 26) {
-		way2 = numDecodings(s, index + 2, memo);
-	}
-	memo[index] = way1 + way2;
-	return memo[index];
-}
+    public int numDecodings(String s) {
+        int dp[]=new int[s.length()];
+        Arrays.fill(dp,-1);
+        if(s.charAt(0)=='0') return 0;
+        return helper(s,0,dp);
+    }
+    int helper(String s, int i,int dp[]){
+        if(i>=s.length()) return 1;
+        if(s.charAt(i)=='0') return 0;
+        if(dp[i]!=-1) return dp[i];
+        int ans=0;
+        if(i+1<s.length()){
+            if(s.charAt(i)=='0') return 0;
+            String temp=s.substring(i,i+2);
+            int n=Integer.parseInt(temp);
+            if(n>=1 && n<=26) {
+                ans=ans+helper(s,i+2,dp);
+            }
+            
+        }
+        ans=ans+helper(s,i+1,dp);
+       // return ans;
+       
+         
+        return dp[i]=ans;
+    }
 }
