@@ -7,9 +7,6 @@ class Solution {
             int t=i;
             while(t>1){
                 int r=t%2;
-                if(i==5){
-                System.out.println(r+"  "+t);
-                }
                 cnt+=r;
                 t=t/2;
                 
