@@ -12,13 +12,16 @@ class Solution {
         int ans=0;
         if(i+1<s.length()){
             if(s.charAt(i)=='0') return 0;
-            String temp=s.substring(i,i+2);
-            int n=Integer.parseInt(temp);
-            if(n>=1 && n<=26) {
+            StringBuilder sb=new StringBuilder();
+            sb.append(s.charAt(i)+""+s.charAt(i+1));
+            int n=Integer.parseInt(sb.toString());
+            if(n>=1 && n<=26){
                 ans=ans+helper(s,i+2,dp);
             }
             
-        }
+            }
+            
+        
         ans=ans+helper(s,i+1,dp);
        // return ans;
        
